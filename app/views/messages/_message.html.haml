@@ -3,9 +3,9 @@
     .upper-message__user-name
       = message.user.name
     .upper-message__date
-      = message.create_at.strftime("%¥/%m/%d %H:%M")
+      = message.created_at.strftime("/%m/%d %H:%M")
   .lower-message
-    - if message.conrent.present?
+    - if message.content.present?
       %p.lower-message__content
         = message.content
     = image_tag message.image.url, class: 'lower-message__image' if message.image.present?          
