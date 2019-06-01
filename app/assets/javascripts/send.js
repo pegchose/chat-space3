@@ -27,6 +27,7 @@ $(function(){
     e.preventDefault();
     var formData = new FormData(this);
     var url = $('this').attr('action'); //<- これでも良い
+    $('.message').animate()
     $.ajax({
       url: url,   //"/groups/#{group_id}/messages", //ここに上の変数urlでも良い
       type: "POST",
@@ -38,7 +39,7 @@ $(function(){
     .done(function(data)  {
       var html = buildHTML(data);
       $('.messages').append(html);
-      $('form__message').val(); // <- これいる？
+      
     })
     .fail(function() {
       alert('error');
