@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
     #end   
     if @message.save
       respond_to do |format|
-        format.html { redirect_to :root }
+        #format.html { redirect_to :root }
         format.json { render json: @message}
       end
     else
