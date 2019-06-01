@@ -7,12 +7,12 @@
 $(function(){
   $("#new_message").on('submit',function(e){
     e.preventDefault();
-    //var formdata = Components.classes["@mozilla.org/files/formdata;1"].createInstance(Components.interfaces.nsIDOMFormData);
-    var formdata = new FormData(this);
+    var formData = new FormData(this);
+    //var url = $('this').attr('action'); <- これでも良い
     $.ajax({
-      url: "/groups/#{group_id}/messages.json",
+      url: "/groups/#{group_id}/messages", //ここに上の変数urlでも良い
       type: "POST",
-      data: formdata,
+      data: formData,
       datatype: 'json',
       processData: false,
       contentType: false
@@ -20,7 +20,7 @@ $(function(){
   });
 })
 
-
+//var formdata = Components.classes["@mozilla.org/files/formdata;1"].createInstance(Components.interfaces.nsIDOMFormData); <- formdataの定義
 //$(function() {
 //  function buildHTML() {
 //    var html = $('<div class="message">').append(message.content);
