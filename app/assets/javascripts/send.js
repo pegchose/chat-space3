@@ -1,15 +1,9 @@
-//if( window.FormData ){
-//  alert("対応しています");
-//} else {
-//  alert("対応していません");
-//}
-
 $(function(){
   function buildHTML(message) {
         var html = `<div class="message">
                       <div class="upper-message">
                         <div class="upper-message__user-name">
-                          ${message.user_name}
+                          ${message.user}
                         </div>
                         <div class="upper-message__date">
                           ${message.created_at}
@@ -19,17 +13,19 @@ $(function(){
                         <p class="lower-message__content">
                           ${message.content}
                         </p>
+                        <img class="lower-message__image" src="${message.image.url}" if ${message.immage}.present?>
                       </div>          
                     </div>`
-        return html;
+        return html
       }
   $("#new_message").on('submit',function(e){
     e.preventDefault();
     var formData = new FormData(this);
-    var url = $('this').attr('action'); //<- これでも良い
+    var url = $('this').attr('action');
+    //$('form__submit').removeAttr('data-disable-with') 
     $('.message').animate()
     $.ajax({
-      url: url,   //"/groups/#{group_id}/messages", //ここに上の変数urlでも良い
+      url: url,   //"/groups/#{group_id}/messages", 
       type: "POST",
       data: formData,
       datatype: 'json',
@@ -44,45 +40,6 @@ $(function(){
     .fail(function() {
       alert('error');
     });
+    return false;
   });
 });
-
-//var formdata = Components.classes["@mozilla.org/files/formdata;1"].createInstance(Components.interfaces.nsIDOMFormData); <- formdataの定義
-//$(function() {
-//  function buildHTML() {
-//    var html = $('<div class="message">').append(message.content);
-//    return html;
-//  }
-//
-//  $('#new_message').on('submit', function(e) {
-//    e.preventDefault();
-//    var formData = new FormData(this);
-//    var url = $('this').attr('action')
-//    var message = textField.val();
-//    $.ajax({
-//      type: 'POST',
-//      url: '/messages.json',
-//      data: formData,
-//      dataType: 'json'
-//    })
-//    .done(function(data) {
-//      var html = buildHTML(data);
-//      $('.messages').append(html);
-//      textField.val('') <- なにこれ
-//    })
-//    .fail(function() {
-//      alert('error');
-//    });
-//  });
-//});
-
-    //message = $('.form__submit').val();
-    // var formdata = new Formdata(this);
-    //var url = $('this').attr('action')
-    //var message = formData.val();
-    //$.ajax({
-    //  type: 'POST',
-    //  url: "/groups/#{group_id}/messages.json",
-    //  data: formData,
-    //  dataType: 'json'
-    //})
