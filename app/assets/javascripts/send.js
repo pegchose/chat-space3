@@ -22,8 +22,8 @@ $(function(){
     e.preventDefault();
     var formData = new FormData(this);
     var url = $('this').attr('action');
-    //$('form__submit').removeAttr('data-disable-with') 
-    $('.message').animate()
+    var form = $('form').offset().top;
+    $('html, body').animate({scrollTop:form});
     $.ajax({
       url: url,   //"/groups/#{group_id}/messages", 
       type: "POST",
