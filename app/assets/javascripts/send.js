@@ -18,28 +18,28 @@ $(function(){
                     </div>`
         return html
       }
-  $("#new_message").on('submit',function(e){
-    e.preventDefault();
-    var formData = new FormData(this);
-    var url = $('this').attr('action');
-    var form = $('form').offset().top;
-    $('html, body').animate({scrollTop:form});
-    $.ajax({
-      url: url,   //"/groups/#{group_id}/messages", 
-      type: "POST",
-      data: formData,
-      datatype: 'json',
-      processData: false,
-      contentType: false
-    })
-    .done(function(data)  {
-      var html = buildHTML(data);
-      $('.messages').append(html);
-      
-    })
-    .fail(function() {
-      alert('error');
-    });
+      $("#new_message").on('submit',function(e){
+        e.preventDefault();
+        var formData = new FormData(this);
+        var url = $('this').attr('action');
+        var form = $('form').offset().top;
+        
+        $.ajax({
+          url: url,   //"/groups/#{group_id}/messages.json", 
+          type: "POST",
+          data: formData,
+          datatype: 'json',
+          processData: false,
+          contentType: false
+        })
+        .done(function(data)  {
+          var html = buildHTML(data);
+          $('.messages').append(html);
+          $('html, body').animate({scrollTop:form});
+        })
+        .fail(function() {
+          alert('error');
+        });
     return false;
   });
 });
