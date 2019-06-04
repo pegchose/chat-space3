@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.where('name LIKE(?)', "%#{params[:name]}%").limit(10)
+    @users = User.where('name LIKE(?)', "%#{params[:name]}%")
     respond_to do |format|
       format.html
-      format.json
+      format.json { render json: @users }
     end
   end
 
@@ -24,4 +24,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email)
   end
+  
 end
