@@ -9,9 +9,8 @@ $(function(){
     search_list.append(html)
   };
   
-  //var add_list = $('#user-search-result')
+
   function addUser(user){
-   // console.log(user)
     var userID = user.attr("data-user-id");
     var add_html = `<div class= 'chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
                      <input name='group[user_ids][]' type='hidden' value='${userID}'></input>

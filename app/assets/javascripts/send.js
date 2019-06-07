@@ -22,7 +22,6 @@ $(function(){
       $("#new_message").on('submit',function(e){
         e.preventDefault();
         var formData = new FormData(this);
-        console.log(formData)
         var url = $(this).attr('action');
         
         $.ajax({
@@ -36,7 +35,7 @@ $(function(){
         .done(function(data)  {
           var html = buildHTML(data);
           $('.messages').append(html);
-          $('#new_message').reset('');
+          $('#new_message')[0].reset();
           $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
