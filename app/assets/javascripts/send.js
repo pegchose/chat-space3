@@ -1,9 +1,10 @@
 $(function(){
   function buildHTML(message) {
+        var imageTag = (typeof message.image !== null )? '<img src="${message.image.url}" class="lower-message__image" >' : ""
         var html = `<div class="message">
                       <div class="upper-message">
                         <div class="upper-message__user-name">
-                          ${message.user}
+                          ${message.user_name}
                         </div>
                         <div class="upper-message__date">
                           ${message.created_at}
@@ -13,33 +14,33 @@ $(function(){
                         <p class="lower-message__content">
                           ${message.content}
                         </p>
-                        <img class="lower-message__image" src="${message.image.url}" if ${message.immage}.present?>
+                        ${imageTag}
                       </div>          
                     </div>`
         return html
       }
-  $("#new_message").on('submit',function(e){
-    e.preventDefault();
-    var formData = new FormData(this);
-    var url = $('this').attr('action');
-    var form = $('form').offset().top;
-    $('html, body').animate({scrollTop:form});
-    $.ajax({
-      url: url,   //"/groups/#{group_id}/messages", 
-      type: "POST",
-      data: formData,
-      datatype: 'json',
-      processData: false,
-      contentType: false
-    })
-    .done(function(data)  {
-      var html = buildHTML(data);
-      $('.messages').append(html);
-      
-    })
-    .fail(function() {
-      alert('error');
-    });
+      $("#new_message").on('submit',function(e){
+        e.preventDefault();
+        var formData = new FormData(this);
+        var url = $(this).attr('action');
+        
+        $.ajax({
+          url: url,   //"/groups/#{group_id}/messages.json", 
+          type: "POST",
+          data: formData,
+          dataType: 'json',
+          processData: false,
+          contentType: false
+        })
+        .done(function(data)  {
+          var html = buildHTML(data);
+          $('.messages').append(html);
+          $('#new_message')[0].reset();
+          $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          alert('error')
+      });
     return false;
   });
 });
