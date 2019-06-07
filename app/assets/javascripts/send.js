@@ -36,7 +36,7 @@ $(function(){
         .done(function(data)  {
           var html = buildHTML(data);
           $('.messages').append(html);
-          $('#new_message').val('')
+          $('#new_message').reset('');
           $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
