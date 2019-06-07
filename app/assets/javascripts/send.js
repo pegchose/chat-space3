@@ -24,7 +24,6 @@ $(function(){
         var formData = new FormData(this);
         console.log(formData)
         var url = $(this).attr('action');
-        //var form = $('.message').offset().top;
         
         $.ajax({
           url: url,   //"/groups/#{group_id}/messages.json", 
@@ -41,12 +40,8 @@ $(function(){
           $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          console.log("ajax通信に失敗しました");
-          console.log("jqXHR          : " + jqXHR.status); // HTTPステータスが取得
-          console.log("textStatus     : " + textStatus);    // タイムアウト、パースエラー
-          console.log("errorThrown    : " + errorThrown.message); // 例外情報
-          console.log("URL            : " + url);
-  });
+          alert('error')
+      });
     return false;
   });
 });
