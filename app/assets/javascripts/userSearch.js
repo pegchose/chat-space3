@@ -23,7 +23,6 @@ $(function(){
 
   $("#user-search-field").on('keyup', function(){
     var input = $('#user-search-field').val()
-    console.log("aaa");
     $.ajax({
       type: "GET",
       url: "/users",
@@ -47,7 +46,7 @@ $(function(){
   
   $(document).on('click', '.user-search-add', function(){   //追加ボタンを押した時
     var input1 = $(this);
-    console.log("aaaa");
+    console.log(this);
     var add_user_html = addUser(input1);
     $("#search-users").append(add_user_html);
       input1.parent()[0].remove();
