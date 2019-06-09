@@ -1,7 +1,9 @@
 $(function(){
   function buildHTML(message) {
-        var imageTag = (typeof message.image !== null )? '<img src="${message.image.url}" class="lower-message__image" >' : ""
-        var html = `<div class="message">
+    console.log(message)
+        var imageTag = (typeof message.image !== null )? `<img src="${message.image}" class="lower-message__image">` : ""
+        console.log(imageTag)
+        var html = `<div class="message" data-messageid="${message.id}">
                       <div class="upper-message">
                         <div class="upper-message__user-name">
                           ${message.user_name}
@@ -40,6 +42,11 @@ $(function(){
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
           alert('error')
+          console.log("ajax通信に失敗しました");
+          console.log("jqXHR          : " + jqXHR.status); // HTTPステータスが取得
+          console.log("textStatus     : " + textStatus);    // タイムアウト、パースエラー
+          console.log("errorThrown    : " + errorThrown.message); // 例外情報
+          console.log("URL            : " + url);
       });
     return false;
   });
