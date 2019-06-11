@@ -1,7 +1,6 @@
 $(function()  {
   
   function addNewMessagesHTML(message){
-    console.log(message);
     var imageTag = (typeof message.image !== null )? `<img src="${message.image}" class="lower-message__image" >` : ""
     var html = `<div class="message" data-messageid="${message.id}">
                   <div class="upper-message">
@@ -23,12 +22,22 @@ $(function()  {
   };
   var reloadMessages = function() {
     var last_message_id = $('.message').last().attr('data-messageid');
+    var group_id = window.location.href         //"/groups/#{group_id}/api/messages.json"  現在url取得
+    
+      //replace関数による文字列の削除
+      var divText = group_id
+      var divText = divText.replace("http://localhost:3000/groups/", "");
+      var divtext = divText.replace("/messages", "");
+      group_id = divtext           //これでも良い。下記と同じこと
 
+    //group_id1 = group_id.match(/\d+/);        //urlの中からgroup_idを取得
+    
     $.ajax({
-      url: '/api/messages.json',     //'/groups/#{group_id}/api/messages.json', //location.href,
+      url: '/api/messages',           //"/api/messages.json",   //location.href, 
       type: 'GET',
       dataType: 'json',
-      data: {id: last_message_id}
+      data: {id: last_message_id,
+            kgroup_id: group_id}    //group_idを渡す
     })
     .done(function(messages)  {
       messages.forEach(function(message){
@@ -39,8 +48,12 @@ $(function()  {
         };
       });
     })
-    .fail(function()  {
-      console.log('error');
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      console.log("ajax通信に失敗しました");
+      console.log("jqXHR          : " + jqXHR.status); // HTTPステータスが取得
+      console.log("textStatus     : " + textStatus);    // タイムアウト、パースエラー
+      console.log("errorThrown    : " + errorThrown.message); // 例外情報
+      console.log("URL            : " + url);
     });
   };
   if (window.location.href.match(/\/groups\/\d+\/messages/)){
