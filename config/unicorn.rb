@@ -23,7 +23,7 @@ run_once = true
 
 before_fork do |server, worker|
   defined?(ActivRecord::Base) &&
-    ActivRecord::Base.cnnection.disconnect!
+    ActiveRecord::Base.connection.disconnect!
 
   if run_once
     run_once = false
@@ -41,5 +41,5 @@ before_fork do |server, worker|
 end
 
 after_fork do |_server, _worker|
-  defined?(ActivRecord::Base) && ActivRecord::Base.establish_connection
+  defined?(ActiveRecord::Base) && ActiveRecord::Base.establish_connection
 end
