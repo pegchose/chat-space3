@@ -63,7 +63,7 @@ gem 'font-awesome-rails'
 gem 'devise'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'web-console', '>= 3.3.0'
+# gem 'web-console', '>= 3.3.0'
 gem 'jquery-ui-rails'
 group :production do
   gem 'unicorn', '5.4.1'
