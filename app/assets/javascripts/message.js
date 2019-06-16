@@ -33,7 +33,7 @@ $(function()  {
     //group_id1 = group_id.match(/\d+/);        //urlの中からgroup_idを取得
     
     $.ajax({
-      url: '/api/messages',           //"/api/messages.json",   //location.href, 
+      url: '/api/messages.json',           //"/api/messages.json",   //location.href, 
       type: 'GET',
       dataType: 'json',
       data: {id: last_message_id,
